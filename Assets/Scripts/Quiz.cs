@@ -16,6 +16,11 @@ public class Quiz : MonoBehaviour
 
     void Start()
     {
+        DisplayQuestion();
+    }
+
+    private void DisplayQuestion()
+    {
         questionText.text = question.GetQuestion();
 
         for (int i = 0; i < answerButtons.Length; i++)
@@ -23,7 +28,22 @@ public class Quiz : MonoBehaviour
             TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = question.GetAnswer(i);
         }
+    }
 
+    private void GetNextQuestion()
+    {
+        SetButtonState(true);
+        SetDefaultButtonSprites();
+        DisplayQuestion();
+    }
+
+    private void SetDefaultButtonSprites()
+    {
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            buttonImage = answerButtons[i].GetComponentInParent<Image>();
+            buttonImage.sprite = defaultAnswerSprite;
+        }
     }
 
     public void OnAnswerSelected(int index)
@@ -33,6 +53,8 @@ public class Quiz : MonoBehaviour
             questionText.text = "Correct!";
             buttonImage = answerButtons[index].GetComponentInChildren<Image>();
             buttonImage.sprite = corretAnswerSprite;
+
+            SetButtonState(false);
         }
         else
         {
@@ -43,6 +65,18 @@ public class Quiz : MonoBehaviour
 
             buttonImage = answerButtons[correctAnswerIndex].GetComponentInChildren<Image>();
             buttonImage.sprite = corretAnswerSprite;
+
+            SetButtonState(false);
+
+        }
+    }
+
+    void SetButtonState(bool state)
+    {
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            Button button = answerButtons[i].GetComponent<Button>();
+            button.interactable = state;
         }
     }
 

@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc17bf144e61504f85097acc23d622d, type: 3}
   m_Name: Question 2
   m_EditorClassIdentifier: 
-  question: is useEffect good?
+  question: In React.js, how we can pass the data from one component to another in
+    React.js ?
+  answers:
+  - SetState
+  - Render with arguments
+  - Props
+  - PropTypes
+  correctAnswerIndex: 2

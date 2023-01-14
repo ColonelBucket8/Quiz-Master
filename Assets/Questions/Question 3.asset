@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc17bf144e61504f85097acc23d622d, type: 3}
   m_Name: Question 3
   m_EditorClassIdentifier: 
-  question: What is the correct syntax for creating a new integer variable with an
-    initial value of 12?
+  question: Which of the following function is true about changing the state in React.js
+    ?
   answers:
-  - int num = 12;
-  - int num = "12";
-  - string num = 12;
-  - float num = 12;
+  - this.State{}
+  - this.setState
+  - this.setChangeState
+  - All of the above
   correctAnswerIndex: 1

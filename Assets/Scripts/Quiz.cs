@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Quiz : MonoBehaviour
 {
@@ -19,6 +22,10 @@ public class Quiz : MonoBehaviour
 
     [Header("Scoring")] [SerializeField] private TextMeshProUGUI scoreText;
 
+    [FormerlySerializedAs("ProgressBar")] [Header("ProgressBar")] [SerializeField]
+    private Slider progressBar;
+
+    public bool isComplete;
 
     private Image buttonImage;
     private int correctAnswerIndex;
@@ -32,6 +39,8 @@ public class Quiz : MonoBehaviour
     {
         timer = FindObjectOfType<Timer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        progressBar.maxValue = questions.Count;
+        progressBar.value = 0;
     }
 
     private void Update()
@@ -70,6 +79,7 @@ public class Quiz : MonoBehaviour
             SetDefaultButtonSprites();
             GetRandomQuestion();
             DisplayQuestion();
+            progressBar.value++;
             scoreKeeper.IncrementQuestionsSeen();
         }
     }
@@ -98,6 +108,9 @@ public class Quiz : MonoBehaviour
         SetButtonState(false);
         timer.CancelTimer();
         scoreText.text = "Score: " + scoreKeeper.CalculateScore() + "%";
+
+        // Fix floating point comparison. Possible losing value
+        if (Math.Abs(progressBar.value - progressBar.maxValue) < 0.1) isComplete = true;
     }
 
     private void DisplayAnswer(int index)

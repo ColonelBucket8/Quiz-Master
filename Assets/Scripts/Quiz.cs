@@ -1,35 +1,36 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour
 {
-    [Header("Questions")]
-    [SerializeField] private TextMeshProUGUI questionText;
-    [SerializeField] QuestionSO question;
+    [Header("Questions")] [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private List<QuestionSO> questions = new();
 
-    [Header("Answers")]
-    [SerializeField] private GameObject[] answerButtons;
-    private int correctAnswerIndex;
-    private bool hasAnsweredEarly;
+    [Header("Answers")] [SerializeField] private GameObject[] answerButtons;
 
-    [Header("Button Colors")]
-    [SerializeField] private Sprite defaultAnswerSprite;
+    [Header("Button Colors")] [SerializeField]
+    private Sprite defaultAnswerSprite;
+
     [SerializeField] private Sprite correctAnswerSprite;
-    private Image buttonImage;
 
-    [Header("Timer")]
-    [SerializeField] private Image timerImage;
+    [Header("Timer")] [SerializeField] private Image timerImage;
+
+
+    private Image buttonImage;
+    private int correctAnswerIndex;
+    private QuestionSO currentQuestion;
+    private bool hasAnsweredEarly;
     private Timer timer;
 
 
-    void Start()
+    private void Start()
     {
         timer = FindObjectOfType<Timer>();
-        DisplayQuestion();
     }
 
-    void Update()
+    private void Update()
     {
         timerImage.fillAmount = timer.fillFraction;
 
@@ -48,25 +49,37 @@ public class Quiz : MonoBehaviour
 
     private void DisplayQuestion()
     {
-        questionText.text = question.GetQuestion();
+        questionText.text = currentQuestion.GetQuestion();
 
-        for (int i = 0; i < answerButtons.Length; i++)
+        for (var i = 0; i < answerButtons.Length; i++)
         {
-            TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = question.GetAnswer(i);
+            var buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            buttonText.text = currentQuestion.GetAnswer(i);
         }
     }
 
     private void GetNextQuestion()
     {
-        SetButtonState(true);
-        SetDefaultButtonSprites();
-        DisplayQuestion();
+        if (questions.Count > 0)
+        {
+            SetButtonState(true);
+            SetDefaultButtonSprites();
+            GetRandomQuestion();
+            DisplayQuestion();
+        }
+    }
+
+    private void GetRandomQuestion()
+    {
+        var index = Random.Range(0, questions.Count);
+        currentQuestion = questions[index];
+
+        if (questions.Contains(currentQuestion)) questions.Remove(currentQuestion);
     }
 
     private void SetDefaultButtonSprites()
     {
-        foreach (GameObject answerButton in answerButtons)
+        foreach (var answerButton in answerButtons)
         {
             buttonImage = answerButton.GetComponentInParent<Image>();
             buttonImage.sprite = defaultAnswerSprite;
@@ -83,7 +96,7 @@ public class Quiz : MonoBehaviour
 
     private void DisplayAnswer(int index)
     {
-        if (index == question.GetCorrectAnswerIndex())
+        if (index == currentQuestion.GetCorrectAnswerIndex())
         {
             questionText.text = "Correct!";
             buttonImage = answerButtons[index].GetComponentInChildren<Image>();
@@ -91,8 +104,8 @@ public class Quiz : MonoBehaviour
         }
         else
         {
-            correctAnswerIndex = question.GetCorrectAnswerIndex();
-            string correctAnswerText = question.GetAnswer(correctAnswerIndex);
+            correctAnswerIndex = currentQuestion.GetCorrectAnswerIndex();
+            var correctAnswerText = currentQuestion.GetAnswer(correctAnswerIndex);
 
             questionText.text = "Sorry, the correct answer was;\n" + correctAnswerText;
 
@@ -101,13 +114,12 @@ public class Quiz : MonoBehaviour
         }
     }
 
-    void SetButtonState(bool state)
+    private void SetButtonState(bool state)
     {
-        foreach (GameObject answerButton in answerButtons)
+        foreach (var answerButton in answerButtons)
         {
-            Button button = answerButton.GetComponent<Button>();
+            var button = answerButton.GetComponent<Button>();
             button.interactable = state;
         }
     }
-
 }

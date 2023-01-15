@@ -240,7 +240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionText: {fileID: 202001439}
-  question: {fileID: 11400000, guid: 50a58c91d41190d42bb435d6005d8ce5, type: 2}
   answerButtons:
   - {fileID: 104225580}
   - {fileID: 1331060502}
@@ -249,6 +248,10 @@ MonoBehaviour:
   defaultAnswerSprite: {fileID: 21300000, guid: 7b37a6316bcdefd418b43eed7b081614, type: 3}
   correctAnswerSprite: {fileID: 21300000, guid: dbe6ba18619b2ad4ab7059d0d8440fb1, type: 3}
   timerImage: {fileID: 129394167}
+  questions:
+  - {fileID: 11400000, guid: 29e5b6eeb06183e4cb8e9c07fd6589ae, type: 2}
+  - {fileID: 11400000, guid: be5bf175ba326fc448b23fb64a7932cc, type: 2}
+  - {fileID: 11400000, guid: 50a58c91d41190d42bb435d6005d8ce5, type: 2}
 --- !u!1 &76612898 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3079394001319992804, guid: c66158b28da87b94f9b278dd9e5c67bc, type: 3}

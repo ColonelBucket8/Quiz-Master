@@ -322,6 +322,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29e5b6eeb06183e4cb8e9c07fd6589ae, type: 2}
   - {fileID: 11400000, guid: be5bf175ba326fc448b23fb64a7932cc, type: 2}
   - {fileID: 11400000, guid: 50a58c91d41190d42bb435d6005d8ce5, type: 2}
+  - {fileID: 11400000, guid: b70bd886faacb9f4fbba2e7d82f3d78c, type: 2}
+  - {fileID: 11400000, guid: cf5530f85e236f24ca34ed12287837b3, type: 2}
+  - {fileID: 11400000, guid: 924203cd4cdad6846b69449605bf64a7, type: 2}
+  - {fileID: 11400000, guid: dc95002a55f3edd458cd04fa5d04592d, type: 2}
+  - {fileID: 11400000, guid: 6ebd4321de2a457438e7672920a41fbe, type: 2}
+  - {fileID: 11400000, guid: 6e5dfa7749eadb7489020de5bcc547a6, type: 2}
+  - {fileID: 11400000, guid: 01816af21c92fc6488ed5438a1163d71, type: 2}
+  - {fileID: 11400000, guid: d6796b77ba4bb7a4f850b089b7154399, type: 2}
+  - {fileID: 11400000, guid: fbbfb832cf58af24f9868485fcfe6ea4, type: 2}
+  - {fileID: 11400000, guid: 7e6d49135e4508e4594afb97727a069d, type: 2}
+  - {fileID: 11400000, guid: 0e168897cc7f55548a1b61c72bb51c51, type: 2}
   answerButtons:
   - {fileID: 104225580}
   - {fileID: 1331060502}
@@ -1647,7 +1658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToCompleteQuestion: 30
-  timeToShowCorrectAnswer: 10
+  timeToShowCorrectAnswer: 5
   loadNextQuestion: 0
   isAnsweringQuestion: 0
   fillFraction: 0

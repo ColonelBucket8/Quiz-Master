@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc17bf144e61504f85097acc23d622d, type: 3}
   m_Name: Question 3
   m_EditorClassIdentifier: 
-  question: Which of the following function is true about changing the state in React.js
-    ?
+  question: If you want to import just the Component from the React library, what
+    syntax do you use?
   answers:
-  - this.State{}
-  - this.setState
-  - this.setChangeState
-  - All of the above
-  correctAnswerIndex: 1
+  - import React.Component from 'react'
+  - import [ Component ] from 'react'
+  - import Component from 'react'
+  - import { Component } from 'react'
+  correctAnswerIndex: 3

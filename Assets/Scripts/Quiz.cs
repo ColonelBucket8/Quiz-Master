@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class Quiz : MonoBehaviour
 {
@@ -30,12 +28,12 @@ public class Quiz : MonoBehaviour
     private Image buttonImage;
     private int correctAnswerIndex;
     private QuestionSO currentQuestion;
-    private bool hasAnsweredEarly;
+    private bool hasAnsweredEarly = true;
     private ScoreKeeper scoreKeeper;
     private Timer timer;
 
 
-    private void Start()
+    private void Awake()
     {
         timer = FindObjectOfType<Timer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
@@ -49,6 +47,13 @@ public class Quiz : MonoBehaviour
 
         if (timer.loadNextQuestion)
         {
+            // Fix floating point comparison. Possible losing value
+            if (Mathf.Abs(progressBar.value - progressBar.maxValue) < 0.1)
+            {
+                isComplete = true;
+                return;
+            }
+
             hasAnsweredEarly = false;
             GetNextQuestion();
             timer.loadNextQuestion = false;
@@ -108,9 +113,6 @@ public class Quiz : MonoBehaviour
         SetButtonState(false);
         timer.CancelTimer();
         scoreText.text = "Score: " + scoreKeeper.CalculateScore() + "%";
-
-        // Fix floating point comparison. Possible losing value
-        if (Math.Abs(progressBar.value - progressBar.maxValue) < 0.1) isComplete = true;
     }
 
     private void DisplayAnswer(int index)

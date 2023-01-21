@@ -61,4 +61,4 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
-TextMesh Pro/** linguist-vendored
+Assets/TextMesh Pro/** linguist-vendored

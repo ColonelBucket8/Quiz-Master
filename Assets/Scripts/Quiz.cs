@@ -91,7 +91,7 @@ public class Quiz : MonoBehaviour
 
     private void GetRandomQuestion()
     {
-        var index = Random.Range(0, questions.Count);
+        int index = Random.Range(0, questions.Count);
         currentQuestion = questions[index];
 
         if (questions.Contains(currentQuestion)) questions.Remove(currentQuestion);
@@ -99,7 +99,7 @@ public class Quiz : MonoBehaviour
 
     private void SetDefaultButtonSprites()
     {
-        foreach (var answerButton in answerButtons)
+        foreach (GameObject answerButton in answerButtons)
         {
             buttonImage = answerButton.GetComponentInParent<Image>();
             buttonImage.sprite = defaultAnswerSprite;
@@ -127,7 +127,7 @@ public class Quiz : MonoBehaviour
         else
         {
             correctAnswerIndex = currentQuestion.GetCorrectAnswerIndex();
-            var correctAnswerText = currentQuestion.GetAnswer(correctAnswerIndex);
+            string correctAnswerText = currentQuestion.GetAnswer(correctAnswerIndex);
 
             questionText.text = "Sorry, the correct answer was;\n" + correctAnswerText;
 
@@ -138,7 +138,7 @@ public class Quiz : MonoBehaviour
 
     private void SetButtonState(bool state)
     {
-        foreach (var answerButton in answerButtons)
+        foreach (GameObject answerButton in answerButtons)
         {
             var button = answerButton.GetComponent<Button>();
             button.interactable = state;
